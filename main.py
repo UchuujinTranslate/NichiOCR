@@ -7,7 +7,7 @@ from rich.console import Console
 from NichiOCR.screenshot import screenshot
 from NichiOCR.json_handling import load_all_json
 from NichiOCR.ocr import init_OCR, process_ocr
-from NichiOCR.string_compare import compare, compare_results
+from NichiOCR.string_compare import compare, compare_results, results_table
 
 
 # Setup 
@@ -20,16 +20,19 @@ console.log(f"All ready!")
 # Main loop
 def lookup():
     img_byte_arr = screenshot()
-    OCRoutput = process_ocr(reader, img_byte_arr)
+    OCRspeaker, OCRstring = process_ocr(reader, img_byte_arr)
 
-    highestRatio = compare(OCRoutput, entireScript)
-    compare_results(highestRatio, entireScript)
+    highestRatio, results = compare(OCRspeaker, OCRstring, entireScript)
+    results = compare_results(highestRatio, entireScript, results)
+
+    results_table(results)
+    
 
 
-keyboard.add_hotkey('ctrl+1', lookup)
+keyboard.add_hotkey('ctrl+shift', lookup)
 
 print("")
-print("Press CTRL+1 to take a screenshot of PPSSPP and lookup the dialog.")
+print("Press CTRL+SHIFT to take a screenshot of PPSSPP and lookup the dialog.")
 print("Press ESC at any time to exit.")
 
 keyboard.wait('esc')

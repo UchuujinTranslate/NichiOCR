@@ -21,3 +21,17 @@ def process_ocr(reader, img_byte_arr):
         console.log(OCRoutput)
 
     return OCRoutput
+
+def split_ocr(OCRoutput):
+    OCRspeaker = OCRoutput[0]
+    OCRstring = ''
+    #OCRstring = str(OCRoutput[1:])
+
+    for i in OCRoutput[1:]:
+        OCRstring = OCRstring + str(i)
+
+    print("OCR Speaker: " + OCRspeaker)
+    print("OCR String: " + OCRstring)
+    print('')
+
+    return OCRspeaker, OCRstring
