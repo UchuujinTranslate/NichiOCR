@@ -44,13 +44,14 @@ def compare_results(highestRatio, entireScript):
     print('')
 
     print("Weblate script contents:")
-    print("Speaker:", entireScript[highestRatio["script"]][int(highestRatio['id']-1)]['speaker'])
-    print("String:", entireScript[highestRatio["script"]][int(highestRatio['id']-1)]['text'])
+    print("Speaker:", entireScript[highestRatio["script"]][int(highestRatio['id'])]['speaker'])
+    print("String:", entireScript[highestRatio["script"]][int(highestRatio['id'])]['text'])
+    # Odd behavior with id numbers, sometimes does not show correct strings based on id
 
     #print("Current english translation:",)
 
     weblateLink = "https://weblate.lolc.at/translate/uchuujin/script-" + \
-        highestRatio['script'] + "/en_US/?type=all&offset=" + str(highestRatio['id']+1)
+        highestRatio['script'] + "/en_US/?type=all&offset=" + str(highestRatio['id'])
         # look into offset values, might often be + 1
 
     print("Link on Weblate:", weblateLink)
