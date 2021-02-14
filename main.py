@@ -2,10 +2,10 @@
 import keyboard
 
 # Import helper scripts
-from NichiOCR.screenshot import *
-from NichiOCR.json_handling import *
-from NichiOCR.ocr import *
-from NichiOCR.string_compare import *
+from NichiOCR.screenshot import screenshot
+from NichiOCR.json_handling import load_all_json
+from NichiOCR.ocr import init_OCR, process_ocr
+from NichiOCR.string_compare import compare, compare_results
 
 
 # Setup
