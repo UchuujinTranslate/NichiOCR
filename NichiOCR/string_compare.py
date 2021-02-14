@@ -37,15 +37,17 @@ def compare(OCRoutput, entireScript):
     return highestRatio
 
 def compare_results(highestRatio, entireScript):
+    print(len(highestRatio))
+
     print("")
-    print("Highest match with a ratio of:", highestRatio["ratio"])
-    print("Script found in:", highestRatio["script"])
+    print("Highest match with a ratio of:", highestRatio['ratio'])
+    print("Script found in:", highestRatio['script'])
     print("ID:", highestRatio['id'])
     print('')
 
     print("Weblate script contents:")
-    print("Speaker:", entireScript[highestRatio["script"]][int(highestRatio['id'])]['speaker'])
-    print("String:", entireScript[highestRatio["script"]][int(highestRatio['id'])]['text'])
+    print("Speaker:", entireScript[highestRatio['script']][int(highestRatio['id'])]['speaker'])
+    print("String:", entireScript[highestRatio['script']][int(highestRatio['id'])]['text'])
     # Odd behavior with id numbers, sometimes does not show correct strings based on id
 
     #print("Current english translation:",)

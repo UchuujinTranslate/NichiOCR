@@ -1,18 +1,23 @@
 import easyocr
+from rich.console import Console
+
+console = Console()
 
 def init_OCR():
-    # Initialize OCR model
-    print("Loading...")
-    reader = easyocr.Reader(['ja', 'en'])
-    print("OCR Model Ready!")
+    with console.status("[bold green]Loading OCR Model..."):
+        # Initialize OCR model
+        reader = easyocr.Reader(['ja', 'en'])
+        console.log(f"OCR Model ready!")
+        
     
     return reader
 
 def process_ocr(reader, img_byte_arr):
-    print("Processing OCR...")
-    OCRoutput = reader.readtext(img_byte_arr, detail = 0)
+    with console.status("[bold green]Processing OCR..."):
+        #console.log("Processing OCR...")
+        OCRoutput = reader.readtext(img_byte_arr, detail = 0)
 
-    print("OCR Output:")
-    print(OCRoutput)
+        console.log("OCR Output:")
+        console.log(OCRoutput)
 
     return OCRoutput
