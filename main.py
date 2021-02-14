@@ -7,7 +7,8 @@ from rich.console import Console
 from NichiOCR.screenshot import screenshot
 from NichiOCR.json_handling import load_all_json
 from NichiOCR.ocr import init_OCR, process_ocr
-from NichiOCR.string_compare import compare, compare_results, results_table
+from NichiOCR.string_compare import compare, compare_results
+from NichiOCR.results_table import results_table
 
 
 # Setup 
@@ -31,8 +32,8 @@ def lookup():
 
 keyboard.add_hotkey('ctrl+shift', lookup)
 
-print("")
-print("Press CTRL+SHIFT to take a screenshot of PPSSPP and lookup the dialog.")
-print("Press ESC at any time to exit.")
+console.log("")
+console.log("Press CTRL+SHIFT to take a screenshot of PPSSPP and lookup the dialog.")
+console.log("Press ESC at any time to exit.")
 
 keyboard.wait('esc')

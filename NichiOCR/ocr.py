@@ -17,8 +17,7 @@ def process_ocr(reader, img_byte_arr):
         #console.log("Processing OCR...")
         OCRoutput = reader.readtext(img_byte_arr, detail = 0)
 
-        console.log("OCR Output:")
-        console.log(OCRoutput)
+        console.log("OCR Output: " + str(OCRoutput))
 
     return OCRoutput
 

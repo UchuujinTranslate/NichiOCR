@@ -1,9 +1,12 @@
 import win32gui
 import io
 from PIL import ImageGrab
+from rich.console import Console
+
+console = Console()
 
 def screenshot():
-    print("Screenshotting now!")
+    console.log("Screenshotting now!")
 
     toplist, winlist = [], []
     def enum_cb(hwnd, results):
@@ -22,7 +25,7 @@ def screenshot():
 
     # Cropping to only text box
     w, h = img.size
-    print(img.size)
+    console.log("Screenshot size: " + str(img.size))
     #dimensions with 2x window size
     #img = img.crop((120, 435, w-120, h-27))
 
