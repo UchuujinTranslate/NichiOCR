@@ -1,6 +1,7 @@
 import polib
 import json
 
+# replace print statements with console.log
 def english_search(script, id):
     jsonFile = json.load(
         open("scripts/" + script + ".json", 'r', encoding='utf-8'))
