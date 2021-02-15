@@ -4,11 +4,14 @@ from rich.console import Console
 
 
 # Import helper scripts
-from NichiOCR.screenshot import screenshot
-from NichiOCR.json_handling import load_all_json
-from NichiOCR.ocr import init_OCR, process_ocr
-from NichiOCR.string_compare import compare, compare_results
-from NichiOCR.results_table import results_table
+from NichiOCR import *
+
+# from NichiOCR.screenshot import screenshot
+# from NichiOCR.json_handling import load_all_json
+# from NichiOCR.ocr import init_OCR, process_ocr
+# from NichiOCR.string_compare import compare, compare_results
+# from NichiOCR.results_table import results_table
+
 
 
 # Setup 
@@ -21,7 +24,10 @@ console.log(f"All ready!")
 # Main loop
 def lookup():
     img_byte_arr = screenshot()
-    OCRspeaker, OCRstring = process_ocr(reader, img_byte_arr)
+
+
+    OCRoutput = process_ocr(reader, img_byte_arr)
+    OCRspeaker, OCRstring = split_ocr(OCRoutput)
 
     highestRatio, results = compare(OCRspeaker, OCRstring, entireScript)
     results = compare_results(highestRatio, entireScript, results)

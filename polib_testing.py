@@ -1,9 +1,9 @@
 import polib
 import json
 
-def english_search(script, id):
-    jsonFile = json.load(
-        open("scripts/" + script + ".json", 'r', encoding='utf-8'))
+
+def english_po(script, id):
+    jsonFile = json.load(open("scripts/" + script + ".json", 'r', encoding='utf-8'))
     po = polib.pofile("scripts/en_US/" + script + ".po")
 
     # modified from sc_patch_translations.py on the main project
@@ -15,21 +15,21 @@ def english_search(script, id):
 
         speakerTranslation = ""
         textTranslation = ""
-
+        
         for entry in po:
             if len(entry.msgstr) > 0:
-
+                
                 if entry.msgid == dialog["speaker"]:
                     speakerTranslation = entry.msgstr
 
                     print("Speaker Match: \n%s\n->\n%s" %
-                          (entry.msgid.rstrip(), speakerTranslation.rstrip()))
+                        (entry.msgid.rstrip(), speakerTranslation.rstrip()))
                     print("JSON ID:", dialog['id'])
 
                 if entry.msgid == dialog["text"]:
                     textTranslation = entry.msgstr
                     print("Text Match: \n%s\n->\n%s\n\n" %
-                          (entry.msgid.rstrip(), textTranslation.rstrip()))
+                        (entry.msgid.rstrip(), textTranslation.rstrip()))
                     print("JSON ID:", dialog['id'])
                     print('')
                     print('')
@@ -39,5 +39,4 @@ def english_search(script, id):
                         print(textTranslation)
                         return speakerTranslation, textTranslation
 
-
-#english_po("0207", "0")
+english_po("0207", "0")

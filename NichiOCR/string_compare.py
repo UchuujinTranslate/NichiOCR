@@ -1,7 +1,7 @@
 from difflib import SequenceMatcher
 
 from rich.console import Console
-import polib
+from NichiOCR.po_handling import english_search
 
 console = Console()
 
@@ -59,7 +59,12 @@ def compare_results(highestRatio, entireScript, results):
     console.log("String:", results['weblate_string'])
     # Odd behavior with id numbers, sometimes does not show correct strings based on id
 
-    #print("Current english translation:",)
+    english_speaker, english_string = english_search(results['script'], results['id'])
+
+    results['eng_speaker'] = english_speaker
+    console.log("English Speaker: " + english_speaker)
+    results['eng_string'] = english_string
+    console.log("English String: " + english_string)
 
 
     weblateURL = "https://weblate.lolc.at/translate/uchuujin/script-" + \

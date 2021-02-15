@@ -46,9 +46,15 @@ def results_table(results):
         "Weblate String",
         results['weblate_string']
     )
+    table.add_row()
+    # English
     table.add_row(
-        "Weblate Translation",
-        "To be added..."
+        "Weblate Eng Speaker",
+        results['eng_speaker']
+    )
+    table.add_row(
+        "Weblate Eng String",
+        results['eng_string']
     )
     table.add_row()
     table.add_row(
