@@ -1,8 +1,10 @@
 import polib
 import json
+from rich.console import Console
+
+console = Console()
 
 
-# replace print statements with console.log
 def english_search(script, id):
     jsonFile = json.load(
         open("scripts/" + script + ".json", 'r', encoding='utf-8'))
@@ -24,21 +26,23 @@ def english_search(script, id):
                 if entry.msgid == dialog["speaker"]:
                     speakerTranslation = entry.msgstr
 
-                    print("Speaker Match: \n%s\n->\n%s" %
-                          (entry.msgid.rstrip(), speakerTranslation.rstrip()))
-                    print("JSON ID:", dialog['id'])
+                    console.log("Speaker Match: \n%s\n->\n%s" %
+                                (entry.msgid.rstrip(),
+                                    speakerTranslation.rstrip()))
+                    console.log("JSON ID:", dialog['id'])
 
                 if entry.msgid == dialog["text"]:
                     textTranslation = entry.msgstr
-                    print("Text Match: \n%s\n->\n%s\n\n" %
-                          (entry.msgid.rstrip(), textTranslation.rstrip()))
-                    print("JSON ID:", dialog['id'])
-                    print('')
-                    print('')
+                    console.log("Text Match: \n%s\n->\n%s\n\n" %
+                                (entry.msgid.rstrip(),
+                                    textTranslation.rstrip()))
+                    console.log("JSON ID:", dialog['id'])
+                    console.log('')
+                    console.log('')
 
                     if int(dialog['id']) == int(id):
-                        print("Found the translated version!")
-                        print(textTranslation)
+                        console.log("Found the translated version!")
+                        console.log(textTranslation)
                         return speakerTranslation, textTranslation
 
 

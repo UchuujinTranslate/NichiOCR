@@ -2,6 +2,7 @@
 import keyboard
 from rich.console import Console
 
+# Import local modules
 from NichiOCR.screenshot import screenshot
 from NichiOCR.json_handling import load_all_json
 from NichiOCR.ocr import init_OCR, process_ocr, split_ocr
