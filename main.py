@@ -2,33 +2,37 @@
 import keyboard
 from rich.console import Console
 
-import NichiOCR as n
+from NichiOCR.screenshot import screenshot
+from NichiOCR.json_handling import load_all_json
+from NichiOCR.ocr import init_OCR, process_ocr, split_ocr
+from NichiOCR.string_compare import compare, compare_results
+from NichiOCR.results_table import results_table
 
 # Setup
 console = Console()
 
-reader = n.ocr.init_OCR()
-entireScript = n.json_handling.load_all_json()
+reader = init_OCR()
+entireScript = load_all_json()
 console.log("All ready!")
 
 
 # Main loop
 def lookup():
     # Take screenshot
-    img_byte_arr = n.screenshot.screenshot()
+    img_byte_arr = screenshot()
 
     # Read Japanese with OCR
-    OCRoutput = n.ocr.process_ocr(reader, img_byte_arr)
-    OCRspeaker, OCRstring = n.ocr.split_ocr(OCRoutput)
+    OCRoutput = process_ocr(reader, img_byte_arr)
+    OCRspeaker, OCRstring = split_ocr(OCRoutput)
 
     # Calculate and display results
-    highestRatio, results = n.string_compare.compare(
+    highestRatio, results = compare(
         OCRspeaker, OCRstring, entireScript)
-    results = n.string_compare.compare_results(
+    results = compare_results(
         highestRatio, entireScript, results)
 
     # Display results in a formatted table
-    n.string_compare.results_table(results)
+    results_table(results)
 
 
 # Wait for keyboard hotkey
