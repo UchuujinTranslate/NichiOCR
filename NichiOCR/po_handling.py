@@ -1,6 +1,7 @@
 import polib
 import json
 
+
 # replace print statements with console.log
 def english_search(script, id):
     jsonFile = json.load(
@@ -41,4 +42,4 @@ def english_search(script, id):
                         return speakerTranslation, textTranslation
 
 
-#english_po("0207", "0")
+# english_po("0207", "0")

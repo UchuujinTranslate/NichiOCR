@@ -17,17 +17,19 @@ def compare(OCRspeaker, OCRstring, entireScript):
     highestRatio['ratio'] = float()
 
     for x, y in entireScript.items():
-        #print(x, y) 
+        # print(x, y)
         for i in y:
-            #print(i['text'])
+            # print(i['text'])
             weblateString = i['text']
             weblateSpeaker = i['speaker']
 
             # string and speaker similarity
-            similarityRatio = similar(weblateString, OCRstring) + similar(weblateSpeaker, OCRspeaker)
+            similarityRatio = similar(weblateString, OCRstring) + \
+                similar(weblateSpeaker, OCRspeaker)
             if similarityRatio >= highestRatio["ratio"]:
                 if similarityRatio > 0.0:
-                    console.log("Found highest match:", similarityRatio, "in script", x)          
+                    console.log("Found highest match:",
+                                similarityRatio, "in script", x)
                     highestRatio['script'] = x
                     highestRatio['ratio'] = similarityRatio
                     highestRatio['id'] = i['id']
@@ -38,8 +40,9 @@ def compare(OCRspeaker, OCRstring, entireScript):
 
     return highestRatio, results
 
+
 def compare_results(highestRatio, entireScript, results):
-    #print(len(highestRatio))
+    # print(len(highestRatio))
 
     console.log("")
     results['ratio'] = highestRatio['ratio']
@@ -50,27 +53,31 @@ def compare_results(highestRatio, entireScript, results):
     console.log("JSON ID:", results['id'])
     console.log('')
 
-    entireScriptContents = entireScript[highestRatio['script']][int(highestRatio['id'])]
+    entireScriptContents = \
+        entireScript[highestRatio['script']][int(highestRatio['id'])]
 
     console.log("Weblate script contents:")
     results['weblate_speaker'] = entireScriptContents['speaker']
     console.log("Speaker:", results['weblate_speaker'])
     results['weblate_string'] = entireScriptContents['text']
     console.log("String:", results['weblate_string'])
-    # Odd behavior with id numbers, sometimes does not show correct strings based on id
+    # Odd behavior with id numbers, sometimes does
+    # not show correct strings based on id
 
-    english_speaker, english_string = english_search(results['script'], results['id'])
+    english_speaker, english_string = \
+        english_search(results['script'], results['id'])
 
     results['eng_speaker'] = english_speaker
     console.log("English Speaker: " + english_speaker)
     results['eng_string'] = english_string
     console.log("English String: " + english_string)
 
-
     weblateURL = "https://weblate.lolc.at/translate/uchuujin/script-" + \
-        highestRatio['script'] + "/en_US/?type=all&offset=" + str(highestRatio['id'])
-        # look into offset values, might often be + 1
-        # id 3 is skipped on weblate for 0207
+        highestRatio['script'] + "/en_US/?type=all&offset=" + \
+        str(highestRatio['id'])
+    # look into offset values, might often be + 1
+    # id 3 is skipped on weblate for 0207
+
     results['weblate_url'] = weblateURL
 
     console.log("URL on Weblate: " + weblateURL)
@@ -79,4 +86,3 @@ def compare_results(highestRatio, entireScript, results):
     # https://weblate.lolc.at/translate/uchuujin/script-0207/en_US/?type=all&offset=1
 
     return results
-

@@ -2,35 +2,36 @@
 import keyboard
 from rich.console import Console
 
-# Import helper scripts
-from NichiOCR import *
+import NichiOCR as n
 
-
-# Setup 
+# Setup
 console = Console()
 
-reader = init_OCR()
-entireScript = load_all_json()
-console.log(f"All ready!")
+reader = n.ocr.init_OCR()
+entireScript = n.json_handling.load_all_json()
+console.log("All ready!")
+
 
 # Main loop
 def lookup():
-    img_byte_arr = screenshot()
+    img_byte_arr = n.screenshot.screenshot()
 
+    OCRoutput = n.ocr.process_ocr(reader, img_byte_arr)
+    OCRspeaker, OCRstring = n.ocr.split_ocr(OCRoutput)
 
-    OCRoutput = process_ocr(reader, img_byte_arr)
-    OCRspeaker, OCRstring = split_ocr(OCRoutput)
+    highestRatio, results = n.string_compare.compare(
+        OCRspeaker, OCRstring, entireScript)
+    results = n.string_compare.compare_results(
+        highestRatio, entireScript, results)
 
-    highestRatio, results = compare(OCRspeaker, OCRstring, entireScript)
-    results = compare_results(highestRatio, entireScript, results)
-
-    results_table(results)
+    n.string_compare.results_table(results)
 
 
 keyboard.add_hotkey('ctrl+shift', lookup)
 
 console.log("")
-console.log("Press CTRL+SHIFT to take a screenshot of PPSSPP and lookup the dialog.")
+console.log("Press CTRL+SHIFT to take a screenshot of PPSSPP\
+     and lookup the dialog.")
 console.log("Press ESC at any time to exit.")
 
 keyboard.wait('esc')

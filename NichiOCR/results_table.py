@@ -1,6 +1,7 @@
 from rich.console import Console
 from rich.table import Table
 
+
 def results_table(results):
 
     console = Console()
@@ -23,9 +24,8 @@ def results_table(results):
         str(results['similarity_ratio']),
     )
     table.add_row()
-    
 
-    # OCR 
+    # OCR
     table.add_row(
         "OCR Speaker",
         results['ocr_speaker'],
@@ -35,7 +35,6 @@ def results_table(results):
         results['ocr_string'],
     )
     table.add_row()
-
 
     # Weblate
     table.add_row(
@@ -47,6 +46,7 @@ def results_table(results):
         results['weblate_string']
     )
     table.add_row()
+
     # English
     table.add_row(
         "Weblate Eng Speaker",
